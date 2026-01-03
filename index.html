@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
         
-        /* Animated background */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -34,7 +33,40 @@
             z-index: -1;
         }
         
-        /* Header */
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            background: rgba(20, 20, 30, 0.8);
+            color: #888;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lang-btn:hover {
+            border-color: rgba(78, 205, 196, 0.6);
+            color: #fff;
+        }
+        
+        .lang-btn.active {
+            background: linear-gradient(135deg, #4ECDC4, #3db8b0);
+            border-color: #4ECDC4;
+            color: #fff;
+        }
+        
         .header {
             text-align: center;
             padding: 60px 20px 40px;
@@ -48,26 +80,11 @@
             margin-bottom: 20px;
         }
         
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #4ECDC4 0%, #2d8a85 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 8px 32px rgba(78, 205, 196, 0.3);
-        }
-        
         .logo-text {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: 700;
-            background: linear-gradient(135deg, #4ECDC4, #FF9800);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 4px;
+            letter-spacing: 8px;
+            text-shadow: 0 4px 20px rgba(78, 205, 196, 0.3);
         }
         
         .header h1 {
@@ -82,14 +99,12 @@
             font-size: 0.9em;
         }
         
-        /* Container */
         .container {
             max-width: 720px;
             margin: 0 auto;
             padding: 0 24px 60px;
         }
         
-        /* Cards */
         .card {
             background: linear-gradient(145deg, rgba(30, 30, 45, 0.8), rgba(20, 20, 30, 0.9));
             border: 1px solid rgba(78, 205, 196, 0.1);
@@ -161,7 +176,6 @@
             color: #4ECDC4;
         }
         
-        /* Highlight box */
         .highlight {
             background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(78, 205, 196, 0.05));
             border: 1px solid rgba(78, 205, 196, 0.2);
@@ -187,7 +201,6 @@
             font-size: 0.95em;
         }
         
-        /* Footer */
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -206,114 +219,148 @@
             text-decoration: none;
         }
         
-        /* Responsive */
         @media (max-width: 600px) {
-            .header {
-                padding: 40px 20px 30px;
-            }
-            .logo-text {
-                font-size: 1.8em;
-            }
-            .header h1 {
-                font-size: 1.4em;
-            }
-            .card {
-                padding: 20px;
-            }
+            .header { padding: 40px 20px 30px; }
+            .logo-text { font-size: 2em; letter-spacing: 4px; }
+            .header h1 { font-size: 1.4em; }
+            .card { padding: 20px; }
+            .lang-switcher { top: 10px; right: 10px; }
+            .lang-btn { padding: 6px 12px; font-size: 0.8em; }
         }
+        
+        /* Hide content by default */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
     
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('tr')">TR</button>
+    </div>
+    
     <header class="header">
         <div class="logo">
-            <div class="logo-icon">🏰</div>
-            <span class="logo-text">TOWERS</span>
+            <span class="logo-text"><span style="color: #4ECDC4;">T</span><span style="color: #3db8b0;">O</span><span style="color: #F4A460;">W</span><span style="color: #FF9800;">E</span><span style="color: #e88a00;">R</span><span style="color: #d07800;">S</span></span>
         </div>
-        <h1>Privacy Policy</h1>
-        <p class="date">Last updated: January 2025</p>
+        <h1 data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</h1>
+        <p class="date" data-en="Last updated: January 2026" data-tr="Son güncelleme: Ocak 2026">Last updated: January 2026</p>
     </header>
     
     <main class="container">
         <div class="highlight">
             <div class="highlight-icon">🛡️</div>
-            <h3>Your Privacy Matters</h3>
-            <p>TOWERS is a strategy game that respects your privacy.<br>We do not collect personal information.</p>
+            <h3 data-en="Your Privacy Matters" data-tr="Gizliliğiniz Önemli">Your Privacy Matters</h3>
+            <p data-en="TOWERS is a strategy game that respects your privacy. We do not collect personal information." data-tr="TOWERS, gizliliğinize saygı duyan bir strateji oyunudur. Kişisel bilgi toplamıyoruz.">TOWERS is a strategy game that respects your privacy.<br>We do not collect personal information.</p>
         </div>
         
         <div class="card">
             <div class="card-header">
                 <div class="card-icon teal">📱</div>
-                <h2>About the App</h2>
+                <h2 data-en="About the App" data-tr="Uygulama Hakkında">About the App</h2>
             </div>
-            <p>TOWERS is a strategic board game where you build towers by capturing opponent pieces. This policy explains how we handle your information.</p>
+            <p data-en="TOWERS is a strategic board game where you build towers by capturing opponent pieces. This policy explains how we handle your information." data-tr="TOWERS, rakip taşları yiyerek kuleler inşa ettiğiniz stratejik bir tahta oyunudur. Bu politika, bilgilerinizi nasıl işlediğimizi açıklar.">TOWERS is a strategic board game where you build towers by capturing opponent pieces. This policy explains how we handle your information.</p>
         </div>
         
         <div class="card">
             <div class="card-header">
                 <div class="card-icon green">✓</div>
-                <h2>What We DON'T Collect</h2>
+                <h2 data-en="What We DON'T Collect" data-tr="Toplamadığımız Bilgiler">What We DON'T Collect</h2>
             </div>
-            <p><strong style="color: #4ECDC4;">We do not collect any personal information.</strong></p>
+            <p><strong style="color: #4ECDC4;" data-en="We do not collect any personal information." data-tr="Hiçbir kişisel bilgi toplamıyoruz.">We do not collect any personal information.</strong></p>
             <ul>
-                <li>No account registration required</li>
-                <li>No login credentials</li>
-                <li>No personal data (name, email, phone)</li>
-                <li>No location tracking</li>
+                <li data-en="No account registration required" data-tr="Hesap kaydı gerekmiyor">No account registration required</li>
+                <li data-en="No login credentials" data-tr="Giriş bilgisi gerekmiyor">No login credentials</li>
+                <li data-en="No personal data (name, email, phone)" data-tr="Kişisel veri yok (isim, e-posta, telefon)">No personal data (name, email, phone)</li>
+                <li data-en="No location tracking" data-tr="Konum takibi yok">No location tracking</li>
             </ul>
         </div>
         
         <div class="card">
             <div class="card-header">
                 <div class="card-icon orange">📢</div>
-                <h2>Advertisements</h2>
+                <h2 data-en="Advertisements" data-tr="Reklamlar">Advertisements</h2>
             </div>
-            <p>We use <strong style="color: #FF9800;">Google AdMob</strong> to display ads. AdMob may collect:</p>
+            <p data-en="We use Google AdMob to display ads. AdMob may collect:" data-tr="Reklam göstermek için Google AdMob kullanıyoruz. AdMob şunları toplayabilir:">We use <strong style="color: #FF9800;">Google AdMob</strong> to display ads. AdMob may collect:</p>
             <ul>
-                <li>Device advertising ID</li>
-                <li>IP address</li>
-                <li>Device information</li>
-                <li>App interaction data</li>
+                <li data-en="Device advertising ID" data-tr="Cihaz reklam kimliği">Device advertising ID</li>
+                <li data-en="IP address" data-tr="IP adresi">IP address</li>
+                <li data-en="Device information" data-tr="Cihaz bilgisi">Device information</li>
+                <li data-en="App interaction data" data-tr="Uygulama etkileşim verileri">App interaction data</li>
             </ul>
-            <p style="margin-top: 16px; font-size: 0.9em;">Learn more: <a href="https://policies.google.com/privacy" target="_blank" style="color: #4ECDC4;">Google Privacy Policy</a></p>
+            <p style="margin-top: 16px; font-size: 0.9em;" data-en="Learn more: " data-tr="Daha fazla bilgi: ">Learn more: <a href="https://policies.google.com/privacy" target="_blank" style="color: #4ECDC4;">Google Privacy Policy</a></p>
         </div>
         
         <div class="card">
             <div class="card-header">
                 <div class="card-icon purple">💾</div>
-                <h2>Local Storage</h2>
+                <h2 data-en="Local Storage" data-tr="Yerel Depolama">Local Storage</h2>
             </div>
-            <p>Game data is stored <strong style="color: #9C27B0;">only on your device</strong>:</p>
+            <p data-en="Game data is stored only on your device:" data-tr="Oyun verileri yalnızca cihazınızda saklanır:">Game data is stored <strong style="color: #9C27B0;">only on your device</strong>:</p>
             <ul>
-                <li>Saved game progress</li>
-                <li>Language preferences</li>
-                <li>Sound settings</li>
+                <li data-en="Saved game progress" data-tr="Kaydedilmiş oyun ilerlemesi">Saved game progress</li>
+                <li data-en="Language preferences" data-tr="Dil tercihleri">Language preferences</li>
+                <li data-en="Sound settings" data-tr="Ses ayarları">Sound settings</li>
             </ul>
-            <p style="margin-top: 12px;">This data never leaves your device.</p>
+            <p style="margin-top: 12px;" data-en="This data never leaves your device." data-tr="Bu veriler cihazınızdan asla çıkmaz.">This data never leaves your device.</p>
         </div>
         
         <div class="card">
             <div class="card-header">
                 <div class="card-icon blue">👶</div>
-                <h2>Children's Privacy</h2>
+                <h2 data-en="Children's Privacy" data-tr="Çocuk Gizliliği">Children's Privacy</h2>
             </div>
-            <p>TOWERS is suitable for all ages. We do not knowingly collect information from children. The game contains no inappropriate content.</p>
+            <p data-en="TOWERS is suitable for all ages. We do not knowingly collect information from children. The game contains no inappropriate content." data-tr="TOWERS tüm yaşlara uygundur. Çocuklardan bilerek bilgi toplamıyoruz. Oyun uygunsuz içerik içermez.">TOWERS is suitable for all ages. We do not knowingly collect information from children. The game contains no inappropriate content.</p>
         </div>
         
         <div class="card">
             <div class="card-header">
                 <div class="card-icon red">✉️</div>
-                <h2>Contact Us</h2>
+                <h2 data-en="Contact Us" data-tr="İletişim">Contact Us</h2>
             </div>
-            <p>Questions about this policy? Reach out:</p>
+            <p data-en="Questions about this policy? Reach out:" data-tr="Bu politika hakkında sorularınız mı var? Bize ulaşın:">Questions about this policy? Reach out:</p>
             <p style="margin-top: 12px;"><strong style="color: #fff;">📧 towersgame.app@gmail.com</strong></p>
         </div>
     </main>
     
     <footer class="footer">
-        <p>© 2025 TOWERS. All rights reserved.</p>
-        <p>Made with ❤️ for strategy game lovers</p>
+        <p>© 2026 TOWERS. All rights reserved.</p>
+        <p data-en="Made with ❤️ for strategy game lovers" data-tr="Strateji oyunu severler için ❤️ ile yapıldı">Made with ❤️ for strategy game lovers</p>
     </footer>
+    
+    <script>
+        function setLang(lang) {
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    // Preserve child elements (like links)
+                    if (el.querySelector('a')) {
+                        const link = el.querySelector('a').outerHTML;
+                        el.innerHTML = text + ' ' + link;
+                    } else {
+                        el.innerHTML = text;
+                    }
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang === 'tr' ? 'tr' : 'en';
+        }
+        
+        // Initialize with English
+        setLang('en');
+    </script>
 </body>
 </html>
